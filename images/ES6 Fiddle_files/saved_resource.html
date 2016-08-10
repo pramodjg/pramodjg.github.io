@@ -1,0 +1,39 @@
+
+<!-- saved from url=(0011)about:blank -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script>window.console.log = (function() {
+	var escaped = {"&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39", "/": "&#x2F;"};
+	var escapeHTML = function(str) {
+		return String(str).replace(/[&<>"'/]/g, function (s) {
+				return escaped[s];
+		});
+	};	var log = console.log;
+	return function() {
+		log.apply(window.console, arguments);
+		document.body.innerHTML +=
+			"<div>" + 
+				escapeHTML(Array.prototype.slice.call(arguments).join(" ")) + 
+			"</div>";
+	};
+})();
+
+window.console.error = (function() {
+	var err = console.error;
+	return function() {
+		err.apply(window.console, arguments);
+		document.body.innerHTML +=
+			"<div>" + 
+				Array.prototype.slice.call(arguments).join(" ") + 
+		"</div>";
+	};
+})();
+
+</script><style>body{font-family:monospace;padding:10px;color:#666}
+div{border-bottom:1px solid #eee;padding: 2px 0;}</style><script src="http://www.es6fiddle.net/lib/babel/babel-polyfill.js"></script><script src="http://www.es6fiddle.net/lib/babel/babel.js"></script><script type="text/babel" class="babel-text">function sayMsg(msg='This is a default message.') {
+	console.log(msg);
+}
+
+sayMsg();
+sayMsg('This is a different message!');
+</script><script>document.body.innerHTML = '';
+babel.run(document.querySelector(".babel-text").innerHTML);
+</script></head><body><div>This is a default message.</div><div>This is a different message!</div></body></html>
